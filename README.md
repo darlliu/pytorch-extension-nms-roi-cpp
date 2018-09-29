@@ -10,4 +10,4 @@ go into each folder and run ```python build.py install``` changing include_dirs 
 now copy paste the whole folder including python files to pytorch-mask-rcnn and it should work (only cuda version is ported so cuda is needed).
 
 Result: 
-[Test Demo.py](./demofig.png)
+![Test Demo.py](./demofig.png)
