@@ -46,9 +46,9 @@ def pth_nms(dets, thresh):
     num_out = torch.LongTensor(1)
     # keep = torch.cuda.LongTensor(dets.size(0))
     # num_out = torch.cuda.LongTensor(1)
-    print ("starting nms with shapes {}, {}".format(keep.shape, dets_temp.shape))
+    # print ("starting nms with shapes {}, {}".format(keep.shape, dets_temp.shape))
     nms(keep, num_out, dets_temp, thresh)
-    print ("finished nms with shapes {}, {}, num_out is {}".format(keep.shape, dets_temp.shape, num_out))
+    # print ("finished nms with shapes {}, {}, num_out is {}".format(keep.shape, dets_temp.shape, num_out))
     return order[keep[:num_out[0]].cuda()].contiguous()
     # return order[keep[:num_out[0]]].contiguous()
 

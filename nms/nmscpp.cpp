@@ -44,7 +44,7 @@ auto mask_flat = mask.data<intlike_t>();
 _nms(boxes_num, boxes_flat, mask_flat, nms_overlap_thresh);
 
 
-std :: cout << "completed the cuda kernel "<<std::endl;
+// std :: cout << "completed the cuda kernel "<<std::endl;
 auto mask_cpu = mask.toBackend(at::Backend::CPU);
 auto mask_cpu_flat = mask_cpu.data<intlike_t>();
 
@@ -54,7 +54,7 @@ auto remv_cpu_flat = remv_cpu.data<intlike_t>();
 auto keep_flat = keep.data<intlike_t>();
 intlike_t num_to_keep = 0;
 
-std :: cout << "completed setting up keep_flat "<<std::endl;
+// std :: cout << "completed setting up keep_flat "<<std::endl;
 int i, j;
 for (i = 0; i < boxes_num; i++) {
 int nblock = i / threadsPerBlock;
@@ -68,7 +68,7 @@ if (!(remv_cpu_flat[nblock] & (1ULL << inblock))) {
     }
 }
 }
-std :: cout << "completed most work, got this back for number to keep "<<num_to_keep <<std::endl;
+// std :: cout << "completed most work, got this back for number to keep "<<num_to_keep <<std::endl;
 auto num_out_flat = num_out.data<intlike_t>();
 * num_out_flat = num_to_keep;
 

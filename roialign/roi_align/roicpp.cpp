@@ -43,8 +43,6 @@ at::Tensor crop_and_resize_gpu_forward(
         crop_height, crop_width, depth, extrapolation_value,
         crops.data<float>()
     );
-    // auto crops = crops_cuda.toBackend(at::Backend::CPU);
-    // std::cout << "roi ended, got crops shape "<<crops.sizes()<<std::endl;
     return crops;
 }
 
@@ -56,7 +54,7 @@ at::Tensor crop_and_resize_gpu_backward(
     at::Tensor grads_image // resize to [bsize, c, hc, wc], CPU
 ) {
     // shape
-    std::cout << "about to launch backprop roi"<<std::endl;
+    // std::cout << "about to launch backprop roi"<<std::endl;
     const int batch_size = grads_image.size(0);
     const int depth = grads_image.size(1);
     const int image_height = grads_image.size(2);
@@ -67,7 +65,6 @@ at::Tensor crop_and_resize_gpu_backward(
     const int crop_width = grads.size(3);
 
     // init output space
-    grads_image *= 0 ;
     auto grads_cuda = torch::CUDA(at::kFloat).zeros_like(grads_image);
     CropAndResizeBackpropImageLaucher(
         grads.data<float>(),
